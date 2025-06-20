@@ -1,0 +1,76 @@
+import { useState } from 'react';
+import './index.css';
+
+export default function ShopeeCalculator() {
+  const [price, setPrice] = useState<number | ''>('');
+  const [discount, setDiscount] = useState<number | ''>('');
+  const [adminFeePercent, setAdminFeePercent] = useState<number | ''>(6);
+  const [adsCost, setAdsCost] = useState<number | ''>('');
+  const [shippingSubsidy, setShippingSubsidy] = useState<number | ''>('');
+
+  const p = Number(price) || 0;
+  const d = Number(discount) || 0;
+  const a = Number(adminFeePercent) || 0;
+  const i = Number(adsCost) || 0;
+  const s = Number(shippingSubsidy) || 0;
+
+  const discountedPrice = p - (p * d) / 100;
+  const adminFee = (discountedPrice * a) / 100;
+  const totalCost = adminFee + i + s;
+  const netProfit = discountedPrice - totalCost;
+  const margin = discountedPrice === 0 ? 0 : (netProfit / discountedPrice) * 100;
+
+  return (
+    <div className="min-h-screen flex flex-col items-center justify-center bg-[#f9fafb] p-6">
+      <div className="text-center mb-8">
+        <h1 className="text-4xl font-extrabold text-gray-800 mb-2">🔍 Kalkulator Shopee</h1>
+        <p className="text-gray-600 text-sm">Hitung profit jualanmu secara cepat & akurat 🚀</p>
+      </div>
+
+      <div className="bg-white shadow-xl rounded-2xl p-6 w-full max-w-xl space-y-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <Input label="Harga Jual (Rp)" value={price} setValue={setPrice} />
+          <Input label="Diskon (%)" value={discount} setValue={setDiscount} />
+          <Input label="Biaya Admin (%)" value={adminFeePercent} setValue={setAdminFeePercent} />
+          <Input label="Biaya Iklan (Rp)" value={adsCost} setValue={setAdsCost} />
+          <Input label="Subsidi Ongkir (Rp)" value={shippingSubsidy} setValue={setShippingSubsidy} />
+        </div>
+
+        <div className="mt-6 border-t pt-4 space-y-2 text-base">
+          <Result label="Harga Setelah Diskon" value={discountedPrice} />
+          <Result label="Biaya Admin" value={adminFee} />
+          <Result label="Total Biaya Lain" value={totalCost} />
+          <Result label="Profit Bersih" value={netProfit} />
+          <Result label="Margin" value={`${margin.toFixed(2)}%`} isPercentage />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function Input({ label, value, setValue }: { label: string; value: number | ''; setValue: (val: number | '') => void }) {
+  return (
+    <div>
+      <label className="block text-sm font-medium text-gray-700 mb-1">{label}</label>
+      <input
+        type="number"
+        inputMode="decimal"
+        value={value}
+        onChange={(e) => {
+          const val = e.target.value;
+          setValue(val === '' ? '' : Number(val));
+        }}
+        className="w-full rounded-xl border-gray-300 focus:ring-orange-500 focus:border-orange-500 px-3 py-2 text-gray-800"
+        placeholder="0"
+      />
+    </div>
+  );
+}
+
+function Result({ label, value, isPercentage }: { label: string; value: number | string; isPercentage?: boolean }) {
+  return (
+    <p className="text-gray-700">
+      {label}: <span className="text-orange-600 font-semibold">{typeof value === 'number' && !isPercentage ? `Rp${value.toLocaleString()}` : value}</span>
+    </p>
+  );
+}
