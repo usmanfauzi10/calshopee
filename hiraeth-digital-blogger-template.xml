@@ -248,12 +248,12 @@
       <!-- Header -->
       <header class="header">
         <div class="container">
-          <a href="<data:blog.homepageUrl/>" class="logo">
+          <a expr:href="data:blog.homepageUrl" class="logo">
             <data:blog.title/>
           </a>
           <nav>
             <ul class="nav-menu">
-              <li><a href="<data:blog.homepageUrl/>">Home</a></li>
+              <li><a expr:href="data:blog.homepageUrl">Home</a></li>
               <li><a href="#features">Services</a></li>
               <li><a href="#blog">Blog</a></li>
               <li><a href="#contact">Contact</a></li>
