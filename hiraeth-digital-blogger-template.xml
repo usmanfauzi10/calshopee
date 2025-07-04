@@ -1,0 +1,493 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<b:template xmlns:b="http://www.google.com/2005/gml/b" xmlns:data="http://www.google.com/2005/gml/data" xmlns:expr="http://www.google.com/2005/gml/expr">
+  <b:include data='blog' name='all-head-content'/>
+  <html b:css='false' b:js='false'>
+    <head>
+      <meta charset="UTF-8"/>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+      <title><data:blog.pageTitle/></title>
+      <b:if cond='data:blog.metaDescription'>
+        <meta expr:content='data:blog.metaDescription' name='description'/>
+      </b:if>
+      <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+      <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+          font-family: 'Poppins', sans-serif;
+          background: #EDF1F9;
+          background-image: radial-gradient(circle at center, rgba(0, 0, 0, 0.08) 1px, transparent 1px);
+          background-size: 1em 1em;
+          background-repeat: repeat;
+          background-position: center;
+          color: #111;
+          line-height: 1.6;
+        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+        
+        /* Header Styles */
+        .header {
+          background: rgba(255, 255, 255, 0.9);
+          backdrop-filter: blur(10px);
+          padding: 16px 0;
+          position: sticky;
+          top: 0;
+          z-index: 100;
+          border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+        .header .container {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        }
+        .logo {
+          font-size: 18px;
+          font-weight: 600;
+          color: #111;
+          text-decoration: none;
+        }
+        .nav-menu {
+          display: flex;
+          list-style: none;
+          gap: 32px;
+        }
+        .nav-menu a {
+          text-decoration: none;
+          color: #555;
+          font-weight: 500;
+          transition: color 0.3s ease;
+        }
+        .nav-menu a:hover { color: #3976EE; }
+        
+        /* Hero Section */
+        .hero { text-align: center; padding: 100px 24px 60px; }
+        .brand-name {
+          font-size: 16px;
+          font-weight: 400;
+          color: #111;
+          margin-bottom: 16px;
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          padding: 8px 16px;
+          border: 1px solid rgba(0,0,0,0.1);
+          border-radius: 999px;
+          background-color: rgba(57, 118, 238, 0.25);
+          transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .brand-name:hover { transform: scale(1.05); box-shadow: 0 6px 16px rgba(57, 118, 238, 0.2); }
+        .hero h1 { font-size: 56px; font-weight: 700; margin-bottom: 16px; line-height: 1.3; }
+        .hero h1 span { color: #3976EE; }
+        .hero p { font-size: 18px; color: #555; margin-bottom: 16px; }
+        .hero .cta {
+          display: flex;
+          justify-content: center;
+          gap: 16px;
+          margin-top: 32px;
+          margin-bottom: 40px;
+        }
+        .hero .cta a {
+          text-decoration: none;
+          padding: 12px 20px;
+          border-radius: 999px;
+          font-weight: 500;
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          transition: transform 0.3s ease, box-shadow 0.3s ease;
+          border: 1px solid rgba(0,0,0,0.1);
+        }
+        .hero .cta a:first-child { background-color: #000; color: #fff; }
+        .hero .cta a:last-child { background-color: #3976EE; color: #fff; }
+        .hero .cta a:hover { transform: scale(1.05); box-shadow: 0 6px 16px rgba(57, 118, 238, 0.2); }
+        
+        /* Features Section */
+        .features {
+          padding: 60px 24px;
+          background: #fff;
+          text-align: center;
+        }
+        .features h2 { font-size: 32px; font-weight: 700; margin-bottom: 16px; }
+        .features p {
+          max-width: 720px;
+          margin: 0 auto 40px;
+          color: #555;
+        }
+        .feature-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+          gap: 24px;
+          max-width: 960px;
+          margin: 0 auto;
+        }
+        .feature-card {
+          background-color: #f9fafb;
+          padding: 24px;
+          border-radius: 16px;
+          text-align: left;
+          box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+          transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .feature-card:hover { transform: translateY(-4px); box-shadow: 0 8px 32px rgba(0,0,0,0.1); }
+        .feature-card h3 { font-size: 18px; font-weight: 600; margin-bottom: 8px; }
+        .feature-card p { font-size: 14px; color: #666; }
+        
+        /* Blog Section */
+        .blog-section {
+          padding: 60px 24px;
+          background: #f8f9fa;
+        }
+        .blog-section h2 {
+          text-align: center;
+          font-size: 32px;
+          font-weight: 700;
+          margin-bottom: 40px;
+        }
+        .posts-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+          gap: 24px;
+          max-width: 960px;
+          margin: 0 auto;
+        }
+        .post-card {
+          background: #fff;
+          border-radius: 16px;
+          overflow: hidden;
+          box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+          transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .post-card:hover { transform: translateY(-4px); box-shadow: 0 8px 32px rgba(0,0,0,0.1); }
+        .post-card img {
+          width: 100%;
+          height: 200px;
+          object-fit: cover;
+        }
+        .post-content {
+          padding: 20px;
+        }
+        .post-title {
+          font-size: 18px;
+          font-weight: 600;
+          margin-bottom: 8px;
+          color: #111;
+          text-decoration: none;
+          line-height: 1.4;
+        }
+        .post-title:hover { color: #3976EE; }
+        .post-snippet {
+          color: #666;
+          font-size: 14px;
+          margin-bottom: 12px;
+        }
+        .post-meta {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          font-size: 12px;
+          color: #888;
+        }
+        .read-more {
+          color: #3976EE;
+          text-decoration: none;
+          font-weight: 500;
+        }
+        .read-more:hover { text-decoration: underline; }
+        
+        /* Sidebar */
+        .sidebar {
+          background: #fff;
+          padding: 24px;
+          border-radius: 16px;
+          box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+          margin-bottom: 24px;
+        }
+        .sidebar h3 {
+          font-size: 18px;
+          font-weight: 600;
+          margin-bottom: 16px;
+          color: #111;
+        }
+        .sidebar ul {
+          list-style: none;
+        }
+        .sidebar li {
+          margin-bottom: 8px;
+        }
+        .sidebar a {
+          color: #555;
+          text-decoration: none;
+          font-size: 14px;
+        }
+        .sidebar a:hover { color: #3976EE; }
+        
+        /* Footer */
+        footer {
+          background: #EDF1F9;
+          background-image: radial-gradient(circle at center, rgba(0, 0, 0, 0.08) 1px, transparent 1px);
+          background-size: 1em 1em;
+          background-repeat: repeat;
+          background-position: center;
+          padding: 40px 24px;
+          text-align: center;
+          font-size: 14px;
+          color: #888;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+          .hero h1 { font-size: 32px; }
+          .hero .cta { flex-direction: column; align-items: center; }
+          .nav-menu { display: none; }
+          .feature-grid { grid-template-columns: 1fr; }
+          .posts-grid { grid-template-columns: 1fr; }
+        }
+      </style>
+    </head>
+    <body>
+      <!-- Header -->
+      <header class="header">
+        <div class="container">
+          <a expr:href="data:blog.homepageUrl" class="logo">
+            <data:blog.title/>
+          </a>
+          <nav>
+            <ul class="nav-menu">
+              <li><a expr:href="data:blog.homepageUrl">Home</a></li>
+              <li><a href="#features">Services</a></li>
+              <li><a href="#blog">Blog</a></li>
+              <li><a href="#contact">Contact</a></li>
+            </ul>
+          </nav>
+        </div>
+      </header>
+
+      <!-- Hero Section -->
+      <section class="hero">
+        <div class="brand-name">
+          <i class="fas fa-trophy" style="color: #000;"></i>
+          Hiraeth Digital Studios
+        </div>
+        <h1>
+          Lagi cari yang bisa bantu<br/>
+          <span>urus iklan Shopee?</span>
+        </h1>
+        <p>Sini, sharing dulu, nggak perlu takut ditawarin ini-itu.</p>
+        <p style="font-size: 14px; font-weight: 600; color: #444;">
+          <span style="font-weight: 400;">Kami bantu kamu grow dengan strategi iklan yang terbukti cuanin klien dari </span><strong style="color: red; font-weight: 600;">45 juta</strong><span style="font-weight: 400;"> ke </span><strong style="color: green; font-weight: 600;">400+ juta</strong>.
+        </p>
+        <div class="cta">
+          <a href="#features"><i class="fas fa-file-alt"></i> Lihat Portofolio</a>
+          <a href="https://wa.me/YOUR_PHONE_NUMBER" target="_blank"><i class="fas fa-comment"></i> Chat WhatsApp</a>
+        </div>
+      </section>
+
+      <!-- Features Section -->
+      <section class="features" id="features">
+        <h2>Kenapa Pilih Kami?</h2>
+        <p>Kami ngerti banget, ngatur iklan Shopee tuh nggak segampang kelihatannya. Tapi tenang, kamu nggak sendiri. Di sini, semua strategi kita udah teruji. Nggak pake ribet, nggak banyak janji. Yang penting hasilnya cuan dan terukur.</p>
+        <div class="feature-grid">
+          <div class="feature-card">
+            <h3><i class="fas fa-chart-line" style="margin-right: 8px; color: #3976EE;"></i> Strategi Data-Driven</h3>
+            <p>Semua keputusan iklan kami berdasarkan data, bukan asumsi. Jadi bisa dipertanggungjawabkan dan nggak asal-asalan.</p>
+          </div>
+          <div class="feature-card">
+            <h3><i class="fas fa-users" style="margin-right: 8px; color: #3976EE;"></i> Tim Expert Shopee</h3>
+            <p>Spesialis Shopee Ads yang udah keliling dashboard klien dari ratusan ribu sampai miliaran rupiah. Udah terlatih, bukan coba-coba.</p>
+          </div>
+          <div class="feature-card">
+            <h3><i class="fas fa-microchip" style="margin-right: 8px; color: #3976EE;"></i> Teknologi Canggih</h3>
+            <p>Pakai automation tools dan AI buat optimasi bid &amp; budget. Kerja cerdas, hasil maksimal.</p>
+          </div>
+          <div class="feature-card">
+            <h3><i class="fas fa-headset" style="margin-right: 8px; color: #3976EE;"></i> Support Dedicated</h3>
+            <p>Ada tim yang standby buat bantuin kamu. Mulai dari strategi sampai laporan rutin mingguan, semua transparan.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Blog Section -->
+      <section class="blog-section" id="blog">
+        <div class="container">
+          <h2>Latest Articles</h2>
+          <div class="posts-grid">
+            <b:section class='main' id='main' showaddelement='yes'>
+              <b:widget id='Blog1' locked='true' title='Blog Posts' type='Blog' version='1' visible='true'>
+                <b:widget-settings>
+                  <b:widget-setting name='blowUpLabelsToShow'>5</b:widget-setting>
+                  <b:widget-setting name='showDateHeader'>false</b:widget-setting>
+                  <b:widget-setting name='style.textcolor'>#000000</b:widget-setting>
+                  <b:widget-setting name='showShareButtons'>false</b:widget-setting>
+                  <b:widget-setting name='showCommentFooter'>false</b:widget-setting>
+                  <b:widget-setting name='showBacklinks'>false</b:widget-setting>
+                  <b:widget-setting name='style.urlcolor'>#3976EE</b:widget-setting>
+                  <b:widget-setting name='showInlineAds'>false</b:widget-setting>
+                  <b:widget-setting name='style.linkcolor'>#3976EE</b:widget-setting>
+                </b:widget-settings>
+                <b:includable id='main'>
+                  <b:if cond='data:posts'>
+                    <b:loop values='data:posts' var='post'>
+                      <b:if cond='data:post.isFirstPost or (data:post.isPage and data:view.isPage)'>
+                        <!-- Show full post for single post view -->
+                        <b:if cond='data:view.isPage'>
+                          <article class='post-full'>
+                            <div class='container'>
+                              <h1 class='post-title-full'><data:post.title/></h1>
+                              <div class='post-meta-full'>
+                                <span class='post-author'>By <data:post.author.name/></span>
+                                <span class='post-date'><data:post.timestamp/></span>
+                              </div>
+                              <div class='post-body'>
+                                <data:post.body/>
+                              </div>
+                            </div>
+                          </article>
+                        <b:else/>
+                          <!-- Show post card for homepage -->
+                          <div class='post-card'>
+                            <b:if cond='data:post.featuredImage'>
+                              <img expr:src='data:post.featuredImage' expr:alt='data:post.title'/>
+                            <b:else/>
+                              <img src='https://via.placeholder.com/300x200/f0f0f0/666666?text=No+Image' expr:alt='data:post.title'/>
+                            </b:if>
+                            <div class='post-content'>
+                              <a class='post-title' expr:href='data:post.url'><data:post.title/></a>
+                              <div class='post-snippet'>
+                                <b:eval expr='data:post.body snippet { length: 150, links: false, linebreaks: false, ellipsis: true }'/>
+                              </div>
+                              <div class='post-meta'>
+                                <span><data:post.timestamp/></span>
+                                <a class='read-more' expr:href='data:post.url'>Read More</a>
+                              </div>
+                            </div>
+                          </div>
+                        </b:if>
+                      <b:else/>
+                        <!-- Show post cards for additional posts -->
+                        <div class='post-card'>
+                          <b:if cond='data:post.featuredImage'>
+                            <img expr:src='data:post.featuredImage' expr:alt='data:post.title'/>
+                          <b:else/>
+                            <img src='https://via.placeholder.com/300x200/f0f0f0/666666?text=No+Image' expr:alt='data:post.title'/>
+                          </b:if>
+                          <div class='post-content'>
+                            <a class='post-title' expr:href='data:post.url'><data:post.title/></a>
+                            <div class='post-snippet'>
+                              <b:eval expr='data:post.body snippet { length: 150, links: false, linebreaks: false, ellipsis: true }'/>
+                            </div>
+                            <div class='post-meta'>
+                              <span><data:post.timestamp/></span>
+                              <a class='read-more' expr:href='data:post.url'>Read More</a>
+                            </div>
+                          </div>
+                        </div>
+                      </b:if>
+                    </b:loop>
+                  <b:else/>
+                    <div class='no-posts'>
+                      <p>No posts found. Start creating your first blog post!</p>
+                    </div>
+                  </b:if>
+                </b:includable>
+              </b:widget>
+            </b:section>
+          </div>
+        </div>
+      </section>
+
+      <!-- Sidebar Widgets -->
+      <b:section class='sidebar' id='sidebar' showaddelement='yes'>
+        <b:widget id='HTML1' locked='false' title='About Us' type='HTML' version='1' visible='true'>
+          <b:widget-settings>
+            <b:widget-setting name='content'>
+              <div class="sidebar">
+                <h3>About Hiraeth Digital</h3>
+                <p>Kami adalah tim digital marketing specialist yang fokus pada Shopee advertising. Dengan pengalaman mengelola campaign dari berbagai skala bisnis, kami siap membantu bisnis Anda tumbuh.</p>
+              </div>
+            </b:widget-setting>
+          </b:widget-settings>
+          <b:includable id='main'>
+            <b:if cond='data:title != &quot;&quot;'>
+              <data:content/>
+            </b:if>
+          </b:includable>
+        </b:widget>
+        
+        <b:widget id='HTML2' locked='false' title='Quick Links' type='HTML' version='1' visible='true'>
+          <b:widget-settings>
+            <b:widget-setting name='content'>
+              <div class="sidebar">
+                <h3>Quick Links</h3>
+                <ul>
+                  <li><a href="#features">Our Services</a></li>
+                  <li><a href="https://wa.me/YOUR_PHONE_NUMBER">Contact WhatsApp</a></li>
+                  <li><a href="mailto:info@hiraethdigital.com">Email Us</a></li>
+                  <li><a href="#blog">Latest Articles</a></li>
+                </ul>
+              </div>
+            </b:widget-setting>
+          </b:widget-settings>
+          <b:includable id='main'>
+            <b:if cond='data:title != &quot;&quot;'>
+              <data:content/>
+            </b:if>
+          </b:includable>
+        </b:widget>
+      </b:section>
+
+      <!-- Footer -->
+      <footer>
+        <div class="container">
+          <p>© 2025 HIRAETH Digital Studios. All rights reserved.</p>
+          <p>Specialized in Shopee Advertising &amp; Digital Marketing Solutions</p>
+        </div>
+      </footer>
+
+      <style>
+        /* Additional styles for full post view */
+        .post-full {
+          background: #fff;
+          margin: 40px 0;
+          padding: 40px;
+          border-radius: 16px;
+          box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+        }
+        .post-title-full {
+          font-size: 32px;
+          font-weight: 700;
+          margin-bottom: 16px;
+          color: #111;
+        }
+        .post-meta-full {
+          display: flex;
+          gap: 16px;
+          margin-bottom: 24px;
+          font-size: 14px;
+          color: #666;
+        }
+        .post-body {
+          line-height: 1.8;
+          color: #333;
+        }
+        .post-body h2, .post-body h3 {
+          margin: 24px 0 16px 0;
+          color: #111;
+        }
+        .post-body p {
+          margin-bottom: 16px;
+        }
+        .post-body img {
+          max-width: 100%;
+          height: auto;
+          border-radius: 8px;
+          margin: 16px 0;
+        }
+        .no-posts {
+          text-align: center;
+          padding: 40px;
+          color: #666;
+        }
+      </style>
+    </body>
+  </html>
+</b:template>
