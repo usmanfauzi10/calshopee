@@ -11,7 +11,7 @@
       </b:if>
       <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
-      <style>
+      <b:skin><![CDATA[
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
           font-family: 'Poppins', sans-serif;
@@ -221,28 +221,72 @@
         }
         .sidebar a:hover { color: #3976EE; }
         
-        /* Footer */
-        footer {
-          background: #EDF1F9;
-          background-image: radial-gradient(circle at center, rgba(0, 0, 0, 0.08) 1px, transparent 1px);
-          background-size: 1em 1em;
-          background-repeat: repeat;
-          background-position: center;
-          padding: 40px 24px;
-          text-align: center;
-          font-size: 14px;
-          color: #888;
-        }
-        
-        /* Responsive */
-        @media (max-width: 768px) {
-          .hero h1 { font-size: 32px; }
-          .hero .cta { flex-direction: column; align-items: center; }
-          .nav-menu { display: none; }
-          .feature-grid { grid-template-columns: 1fr; }
-          .posts-grid { grid-template-columns: 1fr; }
-        }
-      </style>
+                 /* Footer */
+         footer {
+           background: #EDF1F9;
+           background-image: radial-gradient(circle at center, rgba(0, 0, 0, 0.08) 1px, transparent 1px);
+           background-size: 1em 1em;
+           background-repeat: repeat;
+           background-position: center;
+           padding: 40px 24px;
+           text-align: center;
+           font-size: 14px;
+           color: #888;
+         }
+         
+         /* Additional styles for full post view */
+         .post-full {
+           background: #fff;
+           margin: 40px 0;
+           padding: 40px;
+           border-radius: 16px;
+           box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+         }
+         .post-title-full {
+           font-size: 32px;
+           font-weight: 700;
+           margin-bottom: 16px;
+           color: #111;
+         }
+         .post-meta-full {
+           display: flex;
+           gap: 16px;
+           margin-bottom: 24px;
+           font-size: 14px;
+           color: #666;
+         }
+         .post-body {
+           line-height: 1.8;
+           color: #333;
+         }
+         .post-body h2, .post-body h3 {
+           margin: 24px 0 16px 0;
+           color: #111;
+         }
+         .post-body p {
+           margin-bottom: 16px;
+         }
+         .post-body img {
+           max-width: 100%;
+           height: auto;
+           border-radius: 8px;
+           margin: 16px 0;
+         }
+         .no-posts {
+           text-align: center;
+           padding: 40px;
+           color: #666;
+         }
+         
+         /* Responsive */
+         @media (max-width: 768px) {
+           .hero h1 { font-size: 32px; }
+           .hero .cta { flex-direction: column; align-items: center; }
+           .nav-menu { display: none; }
+           .feature-grid { grid-template-columns: 1fr; }
+           .posts-grid { grid-template-columns: 1fr; }
+         }
+       ]]></b:skin>
     </head>
     <body>
       <!-- Header -->
@@ -443,51 +487,7 @@
         </div>
       </footer>
 
-      <style>
-        /* Additional styles for full post view */
-        .post-full {
-          background: #fff;
-          margin: 40px 0;
-          padding: 40px;
-          border-radius: 16px;
-          box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-        }
-        .post-title-full {
-          font-size: 32px;
-          font-weight: 700;
-          margin-bottom: 16px;
-          color: #111;
-        }
-        .post-meta-full {
-          display: flex;
-          gap: 16px;
-          margin-bottom: 24px;
-          font-size: 14px;
-          color: #666;
-        }
-        .post-body {
-          line-height: 1.8;
-          color: #333;
-        }
-        .post-body h2, .post-body h3 {
-          margin: 24px 0 16px 0;
-          color: #111;
-        }
-        .post-body p {
-          margin-bottom: 16px;
-        }
-        .post-body img {
-          max-width: 100%;
-          height: auto;
-          border-radius: 8px;
-          margin: 16px 0;
-        }
-        .no-posts {
-          text-align: center;
-          padding: 40px;
-          color: #666;
-        }
-      </style>
+
     </body>
   </html>
 </b:template>
